@@ -1,0 +1,307 @@
+
+
+\documentclass[../main]{subfiles}
+\begin{document}
+
+\section{Constant Coefficient Systems. Fourier Syntheis}
+
+\subsection{The Fourier transform}
+
+\begin{defn}
+    \begin{equation}
+        \Sc(\Rr^d)=\{u\in C^\infty(\Rr^d): \forall \alpha,\beta,\sup_{x\in \Rr^d}|x^\alpha \pa_x^\beta u(x)|\le C_{\alpha,\beta}\}
+    \end{equation}
+    this space is topology space with topology defined by semi-norm $|u|_n=\sup_{x \in \Rr^d,\alpha+\beta\le n}|x^\alpha \pa_x^\beta u(x)|$ 
+\end{defn}
+\begin{rem}
+    we can also construct space $\Sc(\Rr^d\times \Rr^d)$, it have proposition: $\forall m\in \Rr$\begin{equation}
+        \sup_{x,y\in \Rr^d}(1+|y|)^{-m+\beta-\alpha}|\pa_x^\alpha \pa_y^\beta u(x,y)|\le C_{\alpha,\beta} 
+    \end{equation}
+\end{rem}
+
+\begin{defn}
+    $\forall u\in \Sc(\Rr^d), T \in \Sc'(\Rr^d), x,\xi \in \Rr^d$
+    \begin{align}
+         & (\Ff u)(\xi)=\wh{u}(\xi)=\int e^{-ix\cdot \xi}u(x)\D{x}\\
+         & (\Ff^{-1}u)(x)=(2\pi)^{-d}\int e^{ix\cdot \xi}u(\xi)\D{\xi}\\
+         & (\Ff T,u)=(T,\Ff u)
+    \end{align}
+\end{defn}
+
+\begin{thm}
+    \begin{enumerate}
+        \item $\Ff$ is homeomorphism on $\Sc$ or $\Sc'$, if $u(x)\in \Sc$ $$\Dis u(x)=(2\pi)^{-d}\int e^{ix\cdot \xi}\wh{u}(\xi)\D{x}$$
+        \item (Plancherel\cite{tempered}) $\forall u \in L^2$, then\begin{equation}
+            ||u||_{L^2}^2=(2\pi)^{-d}||\wh u||_{L^2}^2
+        \end{equation}
+        so Fourier transform is isometric(almost) on $L^2$
+        \item $\forall u\in \Sc $ or $\Sc'$\begin{align}
+            \wh{\pa_x^\alpha u}(\xi)=(i\xi)^\alpha\wh{u}(\xi)\\
+            \pa_\xi^\alpha\wh{u}(\xi)=\wh{(-ix)^\alpha u}(\xi)
+        \end{align}
+    \end{enumerate}
+\end{thm}
+
+\begin{defn}
+    \begin{equation}
+        H^s =\{u\in \Sc': ||\lambda^s \wh{u}||_{L^2}<\infty \}
+    \end{equation}
+    where $\lambda(\xi)=(1+|\xi|^2)^{1/2}$
+\end{defn}
+
+\subsection{The method}
+
+\subsubsection{General method example}
+this section we consider first order about $t$ and constant coefficient systems:
+\begin{align}
+    \begin{cases}
+        \pa_t u+A(\pa_x)u=f & on\quad [0,T]\times \Rr^d\\
+        u|_{t=0}=h & on\quad \Rr^d
+    \end{cases}
+\end{align}
+where $A(\pa_x)=\sum_\alpha A_\alpha\pa_x^\alpha u$. $u(t,x)$ is function from $[0,T]\times \Rr^d$ to $\Rr^N$ and $A_\alpha$ is $N\times N$ order constant matrix.
+
+
+\begin{thm}\label{thm-general}
+    $\forall u\in C^0([0,T];H^s(\Rr^d)),f\in L^1([0,T];H^s(\Rr^d))$ then system on Fourier side is 
+    \begin{align}
+        \begin{cases}
+            \pa_t \wh{u}+A(i\xi)\wh{u}=\wh{f} & on\quad [0,T]\times \Rr^d\\
+            \wh{u}|_{t=0}=\wh{h} & on\quad \Rr^d
+        \end{cases}
+    \end{align}
+    where $A(i\xi)=\sum_\alpha A_\alpha(i\xi)^\alpha$.
+
+    this first order ordinary differential equation has solution
+    \begin{equation}\label{eq-general}
+        \wh{u}(t,\xi)=e^{-t A(i\xi)}\wh{h}(\xi)+\int_0^t e^{-(t-t')A(i\xi)}\wh{f}(t',\xi)\D{t'}
+    \end{equation}
+\end{thm}
+
+\newpage
+
+\begin{thm}
+    if exist function C(t) bounded on any compact set $[0,T]$, and $\forall t\ge 0,\xi\in \Rr^d, |e^{-t A(i\xi)}|\le C(t)$,then:
+    \begin{enumerate}
+        \item $\forall h\in H^s,f\in L^1([0,T];H^s)$, the solution $u(t,x)$ for system is in $C^0([0,T];H^s)$, with
+        \begin{equation}
+            ||u(t)||_{H^s}\le C(t)||h||_{H^s}+\int_0^t C(t-t')||f(t')||_{H^s}\D{t'}
+        \end{equation}
+        \item $\forall h\in L^2,f\in L^1([0,T];L^2)$, the solution $u(t,x)$ for system is in $C^0([0,T];L^2)$, with
+        \begin{equation}
+            ||u(t)||_{L^2}\le C(t)||h||_{L^2}+\int_0^t C(t-t')||f(t')||_{L^2}\D{t'}
+        \end{equation}
+    \end{enumerate}
+\end{thm}
+\newpage
+
+\subsubsection{Specific examples}
+this section is use general method(that is Fourier transform and analysis solution) just learned to solve particular three eq.
+\begin{thm}[heat equation]
+   heat eq:
+    \begin{equation}
+        \pa_t u -\triangle_x u=f, u|_{t=0}=h
+    \end{equation}
+    has solution $u\in C^0([0,T];H^s)$ for all $h\in H^s,f\in L^1([0,T];H^s)$
+\end{thm}
+\vspace{10cm}
+
+\begin{thm}
+    if wave equation is $\pa_t u-\triangle_x u=0, u|_{t=0}=h$, with $h\in C_c^\infty(\Rr^n)$ then solution also have compact support. This is well konw as finite propagation speed.
+\end{thm}
+\newpage 
+
+\begin{thm}[Schrödinger equation]
+    \begin{equation}
+        \pa_t u -i\triangle_x u=f, u|_{t=0}=h
+    \end{equation}
+    has solution $u\in C^0([0,T];H^s)$ whenever $h\in H^s,f\in L^1([0,T];H^s)$
+\end{thm}
+\newpage
+
+\begin{thm}[wave equation]
+    if $h_0\in H^{s+1},h_1\in H^s,f\in L^1([0,T];H^s)$, then wave eq
+    \begin{equation}
+        \pa_t^2 u -\triangle_x u=f, u|_{t=0}=h_0, \pa_t u|_{t=0}=h_1
+    \end{equation}
+    has solution $u\in C^0([0,T];H^{s+1})$,and $\pa_t u,\pa_{x_j} u\in C^0([0,T];H^s)$,with
+    \begin{align}
+        &||u(t)||_{H^{s+1}}\le ||h_0||_{H^{s+1}}+2(1+t)||h_1||_{H^s}+2(1+t)\int_0^t||f(t')||_{H^s}\D{t'}\\
+        &||\pa_t u(t)||_{H^s},||\pa_{x_j} u(t)||_{H^s} \le ||h_0||_{H^{s+1}}+||h_1||_{H^s}+\int_0^t||f(t')||_{H^s}\D{t'}
+    \end{align}
+\end{thm}
+\newpage
+
+\subsubsection{more about wave equation}
+\begin{nota}
+    $C(t,\xi)=\cos(t|\xi|),S(t,\xi)=\frac{\sin{t |\xi|}}{|\xi|}$
+\end{nota}
+
+\begin{thm}
+    \begin{enumerate}
+        \item $C(t,\xi)$ and $S(t,\xi)$ can extension to entire function $C(t,\zeta),S(t,\zeta)$ with estimate:\begin{equation}
+            |C(x,\zeta)|\le e^{t\Im{\zeta}},|S(t,\zeta)|\le |t|e^{t\Im{\zeta}}
+        \end{equation}
+        \item $\pa_t C(t)= (1-\lambda^2)S(t),\pa_t S(t)=C(t)$
+        \item when $\xi\in \Rr^n$, $|C(t)|\le 1$, $\lambda|S(t)|\le (1+t^2)^{1/2}$
+        \end{enumerate}
+\end{thm}
+\vspace{5cm}
+
+\begin{thm}
+    $u_0,u_1\in \Sc', f\in C^k(\Rr,\Sc')$ then wave equation \begin{equation}
+        (\pa_t-\triangle_x)u=f,u|_{t=0}=u_0,\pa_t u|_{t=0}=u_1
+    \end{equation}exist unique solution $u(t,x)\in C^{k+1}(\Rr,\Sc')$
+    with \begin{equation}
+        \wh{u}(t)=C(t)\wh{u_0}+S(t)\wh{u_1}+\int_0^t S(t-s)\wh{f}(s)\D{s}
+    \end{equation} and 
+    \begin{enumerate}
+        \item if $u_0,u_1\in \Sc,f\in C^k(\Rr,\Sc)$ then solution $u\in C^{k+2}(\Rr,\Sc)$
+        \item if $u_0\in H^{s+1},u_1\in H^s,f\in C^0(\Rr,H^s)$ then solution \begin{equation}
+            u\in C^0(\Rr,H^{s+1})\cap C^1(\Rr,H^s)\cap C^2(\Rr,H^{s-1})
+        \end{equation}
+    \end{enumerate}
+\end{thm}
+\newpage
+
+\begin{thm}
+    $u_0\in H^s,u_1\in H^{s-1},f=0$, then energy of solution $u$ at time $t$ define as \begin{equation}
+        E_s(t)=||\pa_t u(t)||_s^2+\sum_{j=1}^n||D_j u(t)||_s^2
+    \end{equation} is independent of t, so it is equals to $E_s=||u_1||_s^2+\sum_{j=1}^n||D_j u_0||_s^2$
+\end{thm}
+
+\newpage
+
+\subsection{Hyperbolicity for first order system}
+in this section we consider more simpler system, first order system about $t$ and $x$
+\begin{align}
+    \begin{cases}
+        \pa_t u +\sum_{j=1}^d A_j\pa_{x_j}u=f  &on \quad [0,T]\times \Rr^d\\
+        u|_{t=0}=h  &on \quad \Rr^d
+    \end{cases}
+\end{align}
+where $A_j$ is $N\times N$ constant matrix, and $u(t,x)$ is $N-$valued function.
+
+this eq is special form of theorem\ref{thm-general},so use \eqref{eq-general}, we can get this simper system's solution on Fourier side:
+\begin{equation}
+    \wh{u}(t,\xi)=e^{-it A(\xi)}\wh{h}(\xi)+\int_0^t e^{i(t'-t)A(\xi)}\wh{f}(t',\xi)\D{t'}
+\end{equation}
+where $A(\xi)=\sum_{j=1}^d\xi_j A_j$
+
+from section 1.2 we see $e^{it A(\xi)}$ play important role in whether solution exist on sobolev space.
+
+\begin{defn}
+    if first order system satisfy $\forall \xi\in \Rr^d, |e^{i A(\xi)}|\le C|\xi|^k$, for some $k>0$,then this system is hyperbolic.
+\end{defn}
+
+\begin{defn}
+    if first order system satisfy $\forall \xi\in \Rr^d, |e^{i A(\xi)}|\le C$,then this system is strongly hyperbolic.
+\end{defn}
+
+\begin{lem}
+    if $\forall |x_0|=1, f(\mu x_0)=O(\mu^k)$, as $k\to \infty $,then $f(x)=O(|x|^k)$, as $ |x| \to \infty$
+\end{lem}
+\vspace{5cm}
+
+\begin{lem}
+    $\lambda({\xi})$ is eigenvalue for matrix $A(\xi)=\sum_j \xi_j A_j$. then $\lambda(\xi)=O(|\xi|)$, as $|\xi|\to \infty$
+\end{lem}
+\newpage
+
+\begin{lem}
+    $J$ is $m-$order Jordan block with parameter $\lambda$, then when $k\ge m$
+    \begin{itemize}
+        \item \begin{equation}
+            J^k=\begin{pmatrix}
+                \lambda^k &\binom{k}{1}\lambda^{k-1} & \cdots & \binom{k}{m-1}\lambda^{k-m+1}\\
+                & \lambda^k & \ddots &\binom{k}{m-2}\lambda^{k-m+2}\\
+                &  &\ddots & \vdots\\
+                & & & \lambda^k
+            \end{pmatrix}
+        \end{equation}
+        \item \begin{equation}
+            e^J=\begin{pmatrix}
+                e^\lambda & e^\lambda &\cdots & \f{(m-1)!}e^\lambda\\
+                & \ddots &\ddots &\vdots\\
+                & & e^\lambda &e^\lambda\\
+                & & & e^\lambda
+            \end{pmatrix}
+        \end{equation}
+    \end{itemize}
+\end{lem}
+\vspace{5cm}
+
+\begin{thm}
+    system is hyperbolic, then for all $\xi\in \Rr^d$, $A(\xi)$ only have real eigenvalue.
+\end{thm}
+
+\newpage
+
+\begin{thm}[not proved]
+    if all eigenvalue of $A(\xi)$ are real and semi-simple, then \begin{equation}
+        A(\xi)=\sum_{j=1}^N\lambda_j(\xi)\Pi_j(\xi)
+    \end{equation}
+    where $\lambda_j(\xi)$ are eigenvalues, and $\Pi_j(\xi)$ are eigenprojectors which can defined by \begin{equation}
+        \lim_{T\to \infty}\f{2T}\int_{-T}^Te^{-is\lambda}e^{isA(\xi)}\D{s}
+    \end{equation}
+\end{thm}
+\vspace{3cm}
+
+\begin{thm}
+    system is strongly hyperbolic is equals to \begin{enumerate}
+        \item $\forall \xi \in \Rr^d$, then eigenvalue of $A(\xi)$ is real and simisimple.
+        \item there exist constant $C$, such that, forall $\xi\in \Rr^d$, the eigenprojectors of $A(\xi)$ is bounded by $C$ uniformly.
+    \end{enumerate}
+\end{thm}
+\newpage
+
+\begin{defn}
+    \begin{enumerate}
+        \item system is hyperbolic symmtric if $\forall j$, $A_j$ is self adjoint(Hermitian).
+        \item system is hyperbolic symmtriable if exist positive define matrix $S$, such that $\forall j$, $SA_j$ is self adjoint.
+    \end{enumerate}
+\end{defn}
+
+\begin{thm}
+    hyperbolic symmtriable system is strongly hyperbolic
+\end{thm}
+\newpage
+
+\begin{defn}
+    system is smooth diagonalizable if $A(\xi)$ can diagonalizable and exist real valued eigenvalues $\lambda_j(\xi)$ and eigenprojectors $\Pi_j(\xi)$ which are analytic on unit sphere, such that $A(\xi)=\sum_j\lambda_j(\xi)\Pi_j(\xi)$
+\end{defn}
+
+\begin{thm}
+    smooth diagonalizable system is strongly hyperbolic.
+\end{thm}
+\vspace{5cm}
+
+\begin{defn}
+    system is strictly hyperbolic if $\forall \xi \neq 0,A(\xi)$ has $N$ distinct real eigenvalues.
+\end{defn}
+\begin{thm}[perturbation theory,not proved]
+    if matrix's eigenvalues have
+    local constant multiplicity, then the eigenvalues and eigenprojectors are both smooth (real analytic) 
+\end{thm}
+\begin{thm}
+    strictly hyperbolic system is smooth diagonalizable
+\end{thm}
+\vspace{5cm}
+
+\begin{rem}
+    although strongly hyperbolic is like strong condition, but preview definition all belong to strongly hyperbolic.
+\end{rem}
+%\vspace{3cm}
+
+\begin{thm}
+    system is strongly hyperbolic then for all $h\in H^s,f\in L^1([0,T];H^s)$, the solution $u\in C^0([0,T];H^s)$ with
+    \begin{equation}
+        ||u(t)||_{H^s}\le C||h||_{H^s}+C\int_0^t||f(t')||_{H^s}\D{t'}
+    \end{equation}
+\end{thm}
+
+\newpage
+
+
+
+\end{document}

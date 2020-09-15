@@ -1,0 +1,54 @@
+\documentclass[../main]{subfiles}
+
+
+\begin{document}
+
+\section{Gronwall's inequality}
+
+\begin{thm}
+\begin{enumerate}
+    \item $y(t)\in AC([0,T],\Rr_+),b(t)\in C([0,T],\Rr)$ and $y'(t)\le b(t)y(t) \quad \forall t\in[0,T]$, then\begin{equation}
+        y(t)\le y(0)\exp{\int_0^t b(s)\D{s}}, \quad \forall t\in [0,T]
+    \end{equation}
+    \item $y(t),b(t)\in C([0,T],\Rr_+), a\ge 0$, and $y(t)\le a +\int_0^t b(s)y(s)\D{s}$, $\forall t\in [0,T]$ then\begin{equation}
+        y(t)\le a \exp{\int_0^t b(s)\D{s}}, \quad \forall t\in [0,T]
+    \end{equation} 
+\end{enumerate}
+\end{thm}
+
+\begin{thm}
+$u(t)\ge 0$ and $\frac{\D}{\D{t}}u(t)\le \gamma u(t)+f(t)$, then \begin{equation}
+    u(t)\le e^{\gamma t} u(0)+\int_0^t e^{\gamma(t-t')}f(t')\D{t'}
+\end{equation}
+\end{thm}
+
+\begin{lem}
+if $u(t)\le K(t)+\int_0^t k(s)u(s)\D{s}$ and the equation associate to this inequality has solution $v(t)$, then $u(t)\le v(t)$ 
+\end{lem}
+
+\begin{thm}
+$u(t)\le K(t)+\int_0^t k(s)u(s)\D{s}, k(s)\ge 0$, then \begin{equation}
+    u(t)\le K(t)+\int_0^t k(s) K(s) \left( \exp \int_s^t k(r)\D{r} \right)\D{s} 
+\end{equation}
+\end{thm}
+
+\begin{thm}
+$u(t)\le K+\int_0^t k(s)u(s)\D{s}, k(s)\ge 0$, then \begin{equation}
+    u(t)\le K\exp \int_0^t k(s)\D{s}
+\end{equation}
+\end{thm}
+
+\begin{thm}
+$x(t)\in C^1[a,b], \alpha, \beta \in L^1[a,b]$, and $x'(t)\le \alpha(t)+\beta(t)x(t), \forall t\in [a,b]$, then\begin{equation}
+    x(t)\le \left( x(t)+\int_a^t e^{-\int_a^s \beta(\tau)\D{\tau}}\alpha(s)\D{s}  \right)e^{\int_a^t\beta(s)\D{s}}
+\end{equation}
+\end{thm}
+
+\begin{thm}
+$\phi, h \in [0,a]$, and $h\ge 0$. $g:[0,a]\to \Rr$ is monotone function and $\phi(t)\le g(t)+\int_0^t h(r)\phi(r)\D{r}, \forall r\in [0,a]$, then\begin{equation}
+    \phi(t)\le g(t)\exp \int_0^t h(r)\D{r}, \forall t\in [0,a]
+\end{equation}
+\end{thm}
+
+
+\end{document}

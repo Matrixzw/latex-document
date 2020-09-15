@@ -1,0 +1,57 @@
+
+\ProvidesPackage{zpack}
+
+%% use package definition
+\usepackage{amssymb,latexsym,amsmath}
+\usepackage{fancyhdr,parskip}
+\usepackage{graphicx,amsthm}
+\usepackage{latexsym}
+\usepackage{tasks}
+
+\usepackage{geometry}
+\usepackage{scrextend}
+\usepackage{listings,xcolor}
+
+\usepackage{mathrsfs} % use \mathscr 
+\usepackage{cite} %使用参考文献
+\usepackage{url} %当插入网址的时候就需要这个
+
+\usepackage{subfiles} %使用多个文件分开的时候用
+
+%% begin newcommand definition
+\newcommand{\Dis}{\displaystyle}
+\newcommand{\f}[1]{\frac{1}{#1}}
+\newcommand{\D}[1]{\,\mathrm{d}#1}
+
+
+\newcommand{\Line}[2]{\underline{\hbox to #1 cm{#2}}}
+\newcommand{\Res}[1]{\mathop{\text{Res}}\limits_{#1}}
+\newcommand{\bk}[1]{\hfill (#1)}
+\newcommand{\diam}{\text{diam}}
+\newcommand{\pp}[2]{\Dis \frac{\partial{#1}}{\partial{#2}}}
+
+\newcommand{\pa}{\partial}
+\newcommand{\wh}{\widehat}
+
+
+\newcommand{\R}{$\surd$}
+\newcommand{\W}{$\times$}
+
+\newcommand{\Ff}{\mathscr{F}} % Fourier transform
+\newcommand{\Sc}{\mathscr{S}} % Schwartz class
+\newcommand{\Rr}{\mathbb{R}} % Schwartz class
+
+%% \theoremstyle{plain} %% This is the default
+\newtheorem{thm}{Theorem}[section]
+\newtheorem{cor}[thm]{Corollary}
+\newtheorem{lem}[thm]{Lemma}
+\newtheorem{prop}[thm]{Proposition}
+
+\theoremstyle{definition}
+\newtheorem{defn}{Definition}[section]
+
+
+\theoremstyle{remark}
+\newtheorem{rem}{Remark}[section]
+\newtheorem*{nota}{Notation}
+
